@@ -17,12 +17,27 @@ const Index = () => {
 
     setIsLoading(true);
     
-    // Simulate backend call
-    setTimeout(() => {
-      toast.success(`Hello ${name}! Backend connection successful! 🎉`);
-      setIsLoading(false);
+    try {
+      const response = await fetch('/api/my/hello/world', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ input: name }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      toast.success(data.output + " 🎉");
       setName("");
-    }, 1000);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to connect to backend");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
