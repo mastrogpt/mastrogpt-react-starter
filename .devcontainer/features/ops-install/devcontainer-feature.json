@@ -1,0 +1,10 @@
+{
+    "id": "ops-install",
+    "version": "1.0.0",
+    "name": "Install OpenServerless CLI (ops)",
+    "description": "Installs ops CLI and runs ops -t to configure tools",
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/node"
+    ]
+}
